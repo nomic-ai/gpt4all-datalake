@@ -3,7 +3,7 @@ An open-source datalake to ingest, organize and efficiently store all data contr
 
 
 ### Architecture
-The core datalake architecture is a simple HTTP API (written in FastAPI) that ingests JSON in a fixed schema, performs some integrity checking and stores it. This JSON is transformed into storage efficient Arrow/Parquet files and stored in a target filesystem. A light-weight index of the entire parquet filesystem is maintained with DuckDB. Pa
+The core datalake architecture is a simple HTTP API (written in FastAPI) that ingests JSON in a fixed schema, performs some integrity checking and stores it. This JSON is transformed into storage efficient Arrow/Parquet files and stored in a target filesystem. A light-weight index of the entire parquet filesystem is maintained with DuckDB.
 
 ### Open sourcing the data.
 Nomic AI will provide automatic snapshots of this raw parquet data.
