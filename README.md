@@ -14,5 +14,5 @@ You will be able to interact with the snapshots:
 ### Data Privacy
 
 
-### Where does this code run?
+### Where does the gpt4all-datalake run?
 While the source code is open-sourced under an Apache-2 License, this datalake run on infrastructure managed and paid for by Nomic AI. 
