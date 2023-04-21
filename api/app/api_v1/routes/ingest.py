@@ -42,10 +42,9 @@ async def chat_ingest_request_to_arrow_table(request: ChatIngestRequest):
 
 @router.post("/chat")
 async def ingest_chat(request: ChatIngestRequest):
-    logger.info(request.conversation[0])
 
     arrow_table, ingest_id = await chat_ingest_request_to_arrow_table(request=request)
-    ingest_save_path = os.path.join(settings.root_filesystem_path, "{:%Y_%m_%d}".format(datetime.now()), 'chats')
+    ingest_save_path = os.path.join(settings.root_filesystem_path, 'data', "{:%Y_%m_%d}".format(datetime.now()), 'chats')
 
     if not os.path.exists(ingest_save_path):
         os.makedirs(ingest_save_path, exist_ok=True)

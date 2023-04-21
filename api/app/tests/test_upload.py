@@ -36,3 +36,22 @@ def test_chat_history_upload(client):
     assert response.status_code == 200
 
     return True
+
+
+
+def test_bulk_chat_history_upload(client):
+
+    for i in range(100):
+        response = client.post(
+            "/v1/ingest/chat",
+            json={
+                'source': 'unittest',
+                'submitter_id': 'unittest',
+                'agent_id': 'test_agent',
+                'conversation': example_conversation
+
+            }
+        )
+        assert response.status_code == 200
+
+    return True

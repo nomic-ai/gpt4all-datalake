@@ -21,3 +21,10 @@ You will be able to interact with the snapshots:
 
 ### Where does the gpt4all-datalake run?
 While the source code is open-sourced under an Apache-2 License, this datalake run on infrastructure managed and paid for by Nomic AI. 
+
+
+### Development
+1. Clone down the repository.
+2. Run `make testenv` to build all docker images and launch the HTTP server.
+3. Go to 'http://localhost/docs' to view the API documentation.
+4. You can run the unit tests with `make test`. Any edits made to the FastAPI app will hot reload.
