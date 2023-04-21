@@ -17,10 +17,19 @@ You will be able to interact with the snapshots:
 
 
 ### Data Privacy
+By sending data to the GPT4All-Datalake you agree to the following.
+
+Data sent to this datalake will be used to train open-source large language models and released to the public.
+There is no expectation of privacy to any data entering this datalake. You can, however, expect attribution. If you attach a unique identifier
+that associates you as the data contributor, Nomic will retain that identifier in any LLM trains that it conducts.
+You will receive credit and public attribution if Nomic releases any model trained on your submitted data.
+You can also submit data anonymously.
 
 
 ### Where does the gpt4all-datalake run?
-While the source code is open-sourced under an Apache-2 License, this datalake run on infrastructure managed and paid for by Nomic AI. 
+While open-sourced under an Apache-2 License, this datalake runs on infrastructure managed and paid for by Nomic AI.
+You are welcome to run this datalake under your own infrastructure! We just ask you also release the underlying data
+that gets sent into it :smile:
 
 
 ### Development
