@@ -1,0 +1,18 @@
+# syntax=docker/dockerfile:1.0.0-experimental
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+
+ARG image_version=gpt4all_datalake-0.0.1
+ENV IMAGE_VERSION=$image_version
+
+# Put first so anytime this file changes other cached layers are invalidated.
+COPY api/requirements.txt /requirements.txt
+
+RUN pip install --upgrade pip
+
+# Run various pip install commands.
+RUN --mount=type=ssh pip install -r /requirements.txt && \
+  rm -Rf /root/.cache && rm -Rf /tmp/pip-install*
+
+
+# Finally, copy app and client.
+COPY api/app /app

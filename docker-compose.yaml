@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  gpt4all-datalake:
+    image: gpt4all-datalake
+    container_name: gpt4all_datalake
+    restart: always #restart on error (usually code compilation from save during bad state)
+    ports:
+      - "80:80"
+    environment:
+      - APP_ENVIRONMENT=dev
+      - CLIENT_HOSTNAME=localhost:4200
+      - WEB_CONCURRENCY=2
+      - EFS_ROOT_PATH=/home
+      - LOG_LEVEL=info
+    volumes:
+      - './api/app:/app'
+      - '~/.aws:/root/.aws'
+      - 'efs_filesystem:/home'
+    command: ["/start-reload.sh"]
+
+volumes:
+  efs_filesystem:

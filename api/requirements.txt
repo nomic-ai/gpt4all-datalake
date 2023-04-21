@@ -1,0 +1,12 @@
+aiohttp>=3.6.2
+aiofiles
+pytest
+pytest-ordering
+pytest-asyncio
+boto3>=1.12.25
+click>=7.0.0
+pydantic>=1.4.0
+requests>=2.24.0
+fastapi>=0.78.0
+pyarrow
+duckdb==0.7.0
