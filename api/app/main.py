@@ -58,7 +58,7 @@ else:
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT2)
 
 
-origins = ['*', f"http://{settings.client_hostname}/", f"https://{settings.client_hostname}/"]
+origins = ['*']
 
 app.add_middleware(
     CORSMiddleware,
