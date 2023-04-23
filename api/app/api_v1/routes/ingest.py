@@ -33,6 +33,7 @@ async def chat_ingest_request_to_arrow_table(request: ChatIngestRequest):
         pa.field('content', pa.string()),
         pa.field('role', pa.string()),
         pa.field('rating', pa.string()),
+        pa.field('stopped', pa.bool_()),
         pa.field('edited_content', pa.string()),
     ],
         metadata={"ingest_id": ingest_id,
