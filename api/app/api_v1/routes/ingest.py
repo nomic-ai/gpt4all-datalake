@@ -22,7 +22,7 @@ async def chat_ingest_request_to_arrow_table(request: ChatIngestRequest):
     '''Converts a ChatIngestRequest to an arrow table for efficient storage.'''
 
     print(request.conversation)
-    if request.ingest_id is not None:
+    if request.ingest_id is None:
         ingest_id = str(uuid.uuid4())
     else:
         ingest_id = str(request.ingest_id)
