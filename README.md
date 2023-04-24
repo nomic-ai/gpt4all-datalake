@@ -28,7 +28,7 @@ You will receive credit and public attribution if Nomic releases any model train
 You can also submit data anonymously.
 
 
-### Where does the gpt4all-datalake run?`
+### Where does the gpt4all-datalake run?
 While open-sourced under an Apache-2 License, this datalake runs on infrastructure managed and paid for by Nomic AI.
 You are welcome to run this datalake under your own infrastructure! We just ask you also release the underlying data
 that gets sent into it under the same attribution terms.
