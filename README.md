@@ -1,12 +1,13 @@
 # gpt4all-datalake
-An open-source datalake to ingest, organize and efficiently store all data contributions made to the gpt4all projects.
+An open-source datalake to ingest, organize and efficiently store all data contributions made to gpt4all.
 
+Hosted version: https://api.gpt4all.io
 
 ### Architecture
-The core datalake architecture is a simple HTTP API (written in FastAPI) that ingests JSON in a fixed schema, performs some integrity checking and stores it. This JSON is transformed into storage efficient Arrow/Parquet files and stored in a target filesystem. A light-weight index of the entire parquet filesystem is maintained with DuckDB.
+The core datalake architecture is a simple HTTP API (written in FastAPI) that ingests JSON in a fixed schema, performs some integrity checking and stores it. This JSON is transformed into storage efficient Arrow/Parquet files and stored in a target filesystem.
 
 #### Data formats
-- Data is stored on disk in parquet files in subdirectories organized by day. These parquet files have a standardized schema allowing for easy manipulation in any programming language.
+- Data is stored on disk / S3 in parquet files in subdirectories organized by day. These parquet files have a standardized schema allowing for easy manipulation in any programming language.
 - 
 
 ### Open sourcing the data.
