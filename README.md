@@ -13,8 +13,9 @@ The core datalake architecture is a simple HTTP API (written in FastAPI) that in
 ### Open sourcing the data.
 Nomic AI will provide automatic snapshots of this raw parquet data.
 You will be able to interact with the snapshots:
+- In their raw exported form.
 - In automatic [Atlas](https://atlas.nomic.ai/) maps over its raw, cleaned and curated form.
-- Through highly-processed downloads where the data has been curated, de-duplicated and cleaned for LLM training/finetuning.
+- Through downloads where the data has been curated, de-duplicated and cleaned for LLM training/finetuning.
 
 
 ### Data Privacy
