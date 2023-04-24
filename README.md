@@ -8,7 +8,7 @@ The core datalake architecture is a simple HTTP API (written in FastAPI) that in
 
 #### Data formats
 - Data is stored on disk / S3 in parquet files in subdirectories organized by day. These parquet files have a standardized schema allowing for easy manipulation in any programming language.
-- 
+- The the input data model can be found [here](api/app/api_v1/models/models.py).
 
 ### Open sourcing the data.
 Nomic AI will provide automatic snapshots of this raw parquet data.
