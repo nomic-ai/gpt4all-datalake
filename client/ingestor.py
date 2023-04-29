@@ -1,32 +1,44 @@
 import argparse
-import json
 import csv
-from typing import List
-from rich.progress import track
+import json
+from typing import Dict, List
+
 import requests
+from rich.progress import track
 
-url = "https://api.gpt4all.io/"
+URL = "https://api.gpt4all.io"
 
-def ingestor(documents: List[dict]):
-    headers = {'Content-Type': 'application/json'}
 
-    for idx, item in enumerate(documents):
-        if idx < 1:
-            response = requests.post(url, json=item, headers=headers)
+def ingestor(
+    conversations: List[Dict],
+    source: str = "",
+    submitter_id: str = "",
+    agent_id: str = "",
+):
+    headers = {"Content-Type": "application/json"}
 
-            if response.status_code >= 200 and response.status_code < 300:
-                print("Request successful!")
-            else:
-                print("Request failed with status code:", response.status_code)
-                print(json.dumps(item, indent=2))
-        
+    for conversation in conversations:
+        json_to_beam = {
+            "source": source,
+            "submitter_id": submitter_id,
+            "agent_id": agent_id,
+            "conversation": conversation,
+        }
+
+        response = requests.post(
+            URL + "/v1/ingest/chat", json=json_to_beam, headers=headers
+        )
+
+        if response.status_code > 300:
+            print("Request failed with status code:", response.status_code)
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Input file to upload to datalake')
-    parser.add_argument('input_file', help='The name of the input file')
+    parser = argparse.ArgumentParser(description="Input file to upload to datalake")
+    parser.add_argument("input_file", help="The name of the input file")
     args = parser.parse_args()
 
-    with open(args.input_file, mode='r') as csv_file:
+    with open(args.input_file, mode="r") as csv_file:
         csv_reader = csv.DictReader(csv_file)
 
         csv_rows = []
@@ -35,10 +47,10 @@ if __name__ == "__main__":
             json_object = row
 
             csv_rows.append(dict(json_object))
-        
-    documents = []
+
+    conversations = []
     for idx, item in enumerate(track(csv_rows)):
-        json_obj = {}
+        json_obj = {"conversation": []}
         try:
             user_obj = {
                 "content": eval(item["function_args"])[1]["content"],
@@ -50,15 +62,13 @@ if __name__ == "__main__":
                 "role": "assistant",
             }
 
-            json_obj["source"] = "prompt-layer"
-            json_obj["submitter_id"] = "YuvaneshA#23"
-            json_obj["agent_id"] = item["engine"]
-            json_obj["conversation"] = []
             json_obj["conversation"].append(user_obj)
             json_obj["conversation"].append(assistant_obj)
 
-            documents.append(json_obj)
+            conversations.append(json_obj)
         except:
-            continue
+            print(
+                f"Index {idx} of the input data failed to be processed. Skipping to next!"
+            )
 
-    ingestor(documents=documents)
+    ingestor(conversations=conversations, source="promptlayer", submitter_id="YuvaA#23", agent_id= "gpt-3.5-turbo")
