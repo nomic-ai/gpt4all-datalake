@@ -8,6 +8,8 @@ import pyarrow.parquet as pq
 import uuid
 import os
 from datetime import datetime, date
+import boto3
+from botocore.exceptions import ClientError
 
 from api_v1.models import ChatIngestRequest, ChatIngestResponse, SuccessResponse
 from api_v1.settings import settings
@@ -56,6 +58,18 @@ async def ingest_chat(request: ChatIngestRequest):
 
     ingest_save_path = os.path.join(ingest_save_path, f"{ingest_id}.parquet")
 
+
     pq.write_table(arrow_table, ingest_save_path, compression=None)
+
+    if settings.gpt4all_datalake_bucket:
+        # Upload the file
+        s3_client = boto3.client('s3')
+        try:
+            response = s3_client.upload_file(ingest_save_path,
+                                             settings.gpt4all_datalake_bucket,
+                                             os.path.join("{:%Y_%m_%d}".format(datetime.now()), 'chats', f"{ingest_id}.parquet"))
+        except ClientError as e:
+            logging.error(e)
+            return False
 
     return ChatIngestResponse(ingest_id=ingest_id)
