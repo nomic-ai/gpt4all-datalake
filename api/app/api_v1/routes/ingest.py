@@ -40,6 +40,7 @@ async def chat_ingest_request_to_arrow_table(request: ChatIngestRequest):
     ],
         metadata={"ingest_id": ingest_id,
                   'submitter_id': request.submitter_id,
+                  'prompt_template': request.prompt_template,
                   'agent_id': request.agent_id})
 
     conversation = pa.Table.from_pylist([{**item.dict(), 'turn': idx} for idx, item in enumerate(request.conversation)], schema=arrow_conversation_schema)
