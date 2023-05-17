@@ -50,6 +50,7 @@ def test_bulk_chat_history_upload(client):
                 'source': 'unittest',
                 'submitter_id': 'unittest',
                 'agent_id': 'test_agent',
+                'prompt_template': '%1',
                 'conversation': example_conversation
 
             }
